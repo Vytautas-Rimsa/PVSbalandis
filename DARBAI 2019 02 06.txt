@@ -1,0 +1,16 @@
+1. darbuotojo info rodymas
+2. darbuotojø sàraðo rodymas
+2.1. darbuotojo redagavimas
+2.1.1. atsidarius redagavimo langui skyrius ir pareigos atvaizduojamos dropdown listuose
+2.1.2. pareigø pasirinkimas lieka priklausomas nuo skyriaus dopdown listo
+2.1.3. nepakeitus duomenø ðiuose dropdown listuose - duomenø bazëje informacija nesikeièia
+2.2. darbuotojo iðtrynimas
+2.2.1. prieð iðtrinant darbuotojà ispëjamojo praneðimo parodymas
+3. sukuriant naujà darbuotojà áraðas lietuviðkom raidëm SQL lentelëje
+4. error'ø redagavimas - atvaizdavimo keitimas (vardas, pavardë ir t.t.)
+5. headeris - skirtingi active
+6. vietoj login.php => index.php
+7. slaptaþodþio redagavimas
+û. slaptaþodþio ðifravimo keitimas ið md5
+
+
