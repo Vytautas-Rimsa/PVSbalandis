@@ -13,6 +13,7 @@ class DB{
         } catch (PDOException $e){
             die($e->getMessage());
         }
+        //$this->$conn = new mysqli(Config::get('mysql/host'), Config::get('mysql/username'), Config::get('mysql/password'), Config::get('mysql/db'));
     }
 
     public static function getInstance(){
@@ -21,6 +22,8 @@ class DB{
         }
         return self::$_instance;
     }
+
+    protected $conn;
 
     public function query($sql, $params = array()){
         $this->_error = false;
@@ -41,12 +44,17 @@ class DB{
         }
         return $this;
     }
-
+//DELETE FROM `users` WHERE `users`.`darb_id` = 109"
+//action: DELETE
+//table: users
+//where0: `users`.`darb_id`
+//1: =
+//2: 109
     public function action($action, $table, $where = array()){
         if(count($where) === 3){
-            $operators = array('=', '>', '<', '>=', '<=');
+            $operators = array('=', '>', '<', '>=', '<=', '==', '===');
 
-            $field      = $where[0]; // pvz vardas
+            $field      = $where[0]; // pvz vardas |
             $operator   = $where[1]; //pvz =
             $value      = $where[2]; //pvz Alex
 
@@ -126,5 +134,169 @@ class DB{
 
     public function count(){
         return $this->_count;
+    }
+
+    public function showUsers($action, $table){
+
+        $sql = $action .'FROM'. $table;
+        $conn = new mysqli(Config::get('mysql/host'), Config::get('mysql/username'), Config::get('mysql/password'), Config::get('mysql/db'));
+// Check connection
+        if ($conn->connect_error) {
+            return false;
+            die("Prisijungti nepavyko: " . $conn->connect_error);
+        }
+
+        $result = $conn->query($sql);
+        return $result;
+    }
+
+    public function showEmployees($action, $table, $where){
+
+        //$sql = $action .'FROM'. $table;
+        $sql = "$action .'FROM'. $table";
+        $conn = new mysqli(Config::get('mysql/host'), Config::get('mysql/username'), Config::get('mysql/password'), Config::get('mysql/db'));
+// Check connection
+        if ($conn->connect_error) {
+            return false;
+            die("Prisijungti nepavyko: " . $conn->connect_error);
+        }
+
+        $result = $conn->query($sql);
+
+        return $result;
+    }
+
+    public function deleteUser($id){
+        //DELETE FROM `users` WHERE `users`.`darb_id` = 109
+        $sql = "DELETE FROM`users` WHERE `users`.`darb_id` = $id";
+        $conn = new mysqli(Config::get('mysql/host'), Config::get('mysql/username'), Config::get('mysql/password'), Config::get('mysql/db'));
+
+        if ($conn->connect_error) {
+            return false;
+            die("Prisijungti nepavyko: " . $conn->connect_error);
+        }
+
+        $result = $conn->query($sql);
+
+        return $result;
+    }
+
+    public function searchUser($search){
+        $sql = "SELECT * FROM `users` WHERE `users`.`vardas` LIKE '%$search%' OR `users`.`pavarde` LIKE '%$search%' OR `users`.`skyrius` LIKE '%$search%'
+			 OR `users`.`pareigos` LIKE '%$search%'";
+        $conn = new mysqli(Config::get('mysql/host'), Config::get('mysql/username'), Config::get('mysql/password'), Config::get('mysql/db'));
+
+        if ($conn->connect_error) {
+            return false;
+            die("Prisijungti nepavyko: " . $conn->connect_error);
+        }
+
+        $result = $conn->query($sql);
+
+        return $result;
+    }
+
+    public function getDepartmentTech($department){
+        $sql="SELECT * FROM `users` WHERE `skyrius` LIKE 'Techninis skyrius'";
+
+        $conn = new mysqli(Config::get('mysql/host'), Config::get('mysql/username'), Config::get('mysql/password'), Config::get('mysql/db'));
+
+        if ($conn->connect_error) {
+            return false;
+            die("Prisijungti nepavyko: " . $conn->connect_error);
+        }
+
+        $result = $conn->query($sql);
+
+        return $result;
+    }
+
+    public function getDepartmentSecurity($department){
+        $sql="SELECT * FROM `users` WHERE `skyrius` LIKE 'Apsaugos skyrius'";
+
+        $conn = new mysqli(Config::get('mysql/host'), Config::get('mysql/username'), Config::get('mysql/password'), Config::get('mysql/db'));
+
+        if ($conn->connect_error) {
+            return false;
+            die("Prisijungti nepavyko: " . $conn->connect_error);
+        }
+
+        $result = $conn->query($sql);
+
+        return $result;
+    }
+
+    public function getDepartmentPersonal($department){
+        $sql="SELECT * FROM `users` WHERE `skyrius` LIKE 'Personalo skyrius'";
+
+        $conn = new mysqli(Config::get('mysql/host'), Config::get('mysql/username'), Config::get('mysql/password'), Config::get('mysql/db'));
+
+        if ($conn->connect_error) {
+            return false;
+            die("Prisijungti nepavyko: " . $conn->connect_error);
+        }
+
+        $result = $conn->query($sql);
+
+        return $result;
+    }
+
+    public function getDepartmentFinance($department){
+        $sql="SELECT * FROM `users` WHERE `skyrius` LIKE 'Finansų skyrius'";
+
+        $conn = new mysqli(Config::get('mysql/host'), Config::get('mysql/username'), Config::get('mysql/password'), Config::get('mysql/db'));
+
+        if ($conn->connect_error) {
+            return false;
+            die("Prisijungti nepavyko: " . $conn->connect_error);
+        }
+
+        $result = $conn->query($sql);
+
+        return $result;
+    }
+
+    public function getDepartmentCommerce($department){
+    $sql="SELECT * FROM `users` WHERE `skyrius` LIKE 'Komercijos skyrius'";
+
+    $conn = new mysqli(Config::get('mysql/host'), Config::get('mysql/username'), Config::get('mysql/password'), Config::get('mysql/db'));
+
+    if ($conn->connect_error) {
+        return false;
+        die("Prisijungti nepavyko: " . $conn->connect_error);
+    }
+
+    $result = $conn->query($sql);
+
+    return $result;
+}
+
+    public function getDepartmentAdministration($department){
+        $sql="SELECT * FROM `users` WHERE `skyrius` LIKE 'Administracija'";
+
+        $conn = new mysqli(Config::get('mysql/host'), Config::get('mysql/username'), Config::get('mysql/password'), Config::get('mysql/db'));
+
+        if ($conn->connect_error) {
+            return false;
+            die("Prisijungti nepavyko: " . $conn->connect_error);
+        }
+
+        $result = $conn->query($sql);
+
+        return $result;
+    }
+
+    public function insertTask($title, $task, $createdData, $createdBy, $taskTo){
+        $sql = "INSERT INTO `tasks` (`task_id`, `title`, `task`, `created_by`, `assigned_to`, `startline`, `deadline`, `finished`) VALUES (NULL, '$title', '$task', '$createdBy', '$taskTo', '$createdData[0]', '$createdData[1]', '');";
+        $conn = new mysqli(Config::get('mysql/host'), Config::get('mysql/username'), Config::get('mysql/password'), Config::get('mysql/db'));
+
+        if ($conn->connect_error) {
+            return false;
+            die("Prisijungti nepavyko: " . $conn->connect_error);
+        }
+
+        $result = $conn->query($sql);
+
+        return $result;
     }
 }

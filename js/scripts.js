@@ -89,3 +89,16 @@ function enableSearchButton() {
   });
 
 })(jQuery); // End of use strict
+
+
+$(function(){
+    $(".displayed").on({
+        mouseenter: function(){
+            $(this).attr('src','images/gear.gif');
+        },
+        mouseleave: function(){
+            $(this).attr('src','images/gear.jpg');
+        }
+    });
+
+});

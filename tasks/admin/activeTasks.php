@@ -1,5 +1,5 @@
 
-
+<!DOCTYPE html>
 <html>
     <head>
 	    <meta charset="utf-8">		
@@ -55,10 +55,18 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="newTask.php">                        
-                    <i class='far fa-file-alt'></i>
-                        <span>Sukurti užduotį</span>
+                    <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class='far fa-file-alt'></i>
+                        <span>Nauja užduotis</span>
                     </a>
+                    <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                        <a class="dropdown-item" href="newTaskAdministration.php">Administracijai</a>
+                        <a class="dropdown-item" href="newTaskSecurity.php">Apsaugos skyriui</a>
+                        <a class="dropdown-item" href="newTaskFinance.php">Finansų skyriui</a>
+                        <a class="dropdown-item" href="newTaskCommerce.php">Komercijos skyriui</a>
+                        <a class="dropdown-item" href="newTaskPersonal.php">Personalo skyriui</a>
+                        <a class="dropdown-item" href="newTaskTech.php">Techninis skyriui</a>
+                    </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -75,13 +83,13 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="charts.html">
+                    <a class="nav-link" href="#">
                         <i class="fas fa-fw fa-chart-area"></i>
                         <span>Charts</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="tables.html">
+                    <a class="nav-link" href="#">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Tables</span>
                     </a>
@@ -93,17 +101,17 @@
                     <div class="card mb-3">
                         <div class="card-header adminCardHeader">Aktyvios užduotys</div>
                         <div class="card-body">
-                            <div id="myAreaChart" width="100%" height="30">
-                            <p>Bla bla bla</p>
-                            <p>Bla bla bla</p>
-                            <p>Bla bla bla</p>
-                            <p>Bla bla bla</p>
-                            <p>Bla bla bla</p>
-                            <p>Bla bla bla</p>
-                            <p>Bla bla bla</p>
-                            <p>Bla bla bla</p>
-                            <p>Bla bla bla</p>
-                            <p>Bla bla bla</p>
+                            <div class="activeTasks">
+                                <p>Bla bla bla</p>
+                                <p>Bla bla bla</p>
+                                <p>Bla bla bla</p>
+                                <p>Bla bla bla</p>
+                                <p>Bla bla bla</p>
+                                <p>Bla bla bla</p>
+                                <p>Bla bla bla</p>
+                                <p>Bla bla bla</p>
+                                <p>Bla bla bla</p>
+                                <p>Bla bla bla</p>
                             </div>
                         </div>
                         <div class="card-footer small text-muted">Paskutinis įrašas 11:59 PM</div>
@@ -114,7 +122,7 @@
                             <div class="card mb-3">
                                 <div class="card-header adminCardHeader">Atliktos užduotys</div>
                                 <div class="card-body">
-                                    <div id="myBarChart" width="100%" height="50">
+                                    <div id="completedTasks">
                                         <p>Bla bla bla</p>
                                         <p>Bla bla bla</p>
                                         <p>Bla bla bla</p>
@@ -129,10 +137,10 @@
                             <div class="card mb-3">
                                 <div class="card-header adminCardHeader">Pradelstos užduotys</div>
                                 <div class="card-body">
-                                    <div id="myPieChart" width="100%" height="100">
-                                    <p>Bla bla bla</p>
-                                    <p>Bla bla bla</p>
-                                    <p>Bla bla bla</p>
+                                    <div id="lateTasks">
+                                        <p>Bla bla bla</p>
+                                        <p>Bla bla bla</p>
+                                        <p>Bla bla bla</p>
                                     </div>
                                 </div>
                                 <div class="card-footer small text-muted">Paskutinis įrašas 11:59 PM</div>
@@ -146,7 +154,7 @@
         </div>
         <!-- /#wrapper -->
         <div class="scroll-to-top rounded">
-            <span><a href=""><i class="fas fa-angle-up" style='font-size:48px;color:white'></i> </a></span>            
+            <span><a href=""><i class="fas fa-angle-up upDownButton"></i> </a></span>
         </div>     
     </body>    
 </html>

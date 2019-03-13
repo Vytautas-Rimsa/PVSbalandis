@@ -1,5 +1,15 @@
+<?php
+    require_once('../../core/init.php');
+    require_once('../../classes/User.php');
 
-
+    $user = new User();
+    if(!$user->exists()){
+        //Redirect::to(404);
+    } else{
+        $data = $user->data();
+    }
+?>
+<!DOCTYPE html>
 <html>
     <head>
 	    <meta charset="utf-8">		
@@ -10,6 +20,10 @@
         <script src="../../js/scripts.js"></script>
         <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.5.0/css/all.css' integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU' crossorigin='anonymous'>
         <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.6.3/css/all.css' integrity='sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/' crossorigin='anonymous'>
+        <!-- Dropdown listui -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </head>
 
     <header>
@@ -28,10 +42,6 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Paieška">
-                        <button class="btn btn-secondary mr-sm-4" type="submit">Paieška</button>
-                    </li>
                     <li class="nav-item mr-sm-4">
                         <a href="#"><i class='fas fa-address-card active'id="info"></i></a>
                     </li>                    
@@ -50,59 +60,44 @@
 	            </div>
 
                 <form method="post" action="info.php" class="formaAplication">
-                    <fieldset>           
-                        <!--<?php echo display_error(); ?>-->
+                    <fieldset>
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-3 col-form-label">Vardas</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="inputName" id="inputName" placeholder="" value="">
+                                <input type="text" class="form-control" name="inputName" id="inputName" placeholder="" value="<?php echo escape($data->vardas); ?>">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-3 col-form-label">Pavardė</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="inputSurname" id="inputSurname" placeholder="" value="">
+                                <input type="text" class="form-control" name="inputSurname" id="inputSurname" placeholder="" value="<?php echo escape($data->pavarde); ?>">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-3 col-form-label">El. paštas</label>
                             <div class="col-sm-9">
-                                <input type="email" class="form-control" name="elpastas" id="inputEmail" placeholder=""  value="">
+                                <input type="email" class="form-control" name="elpastas" id="inputEmail" placeholder=""  value="<?php echo escape($data->elpastas); ?>">
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="exampleInputPassword1" class="col-sm-3 col-form-label">Slaptažodis</label>
-                            <div class="col-sm-9">
-                                <input type="password" class="form-control" name="slaptazodis" id="inputPassword" placeholder="" value="">
-                            </div>
-                        </div>        
-
-                        <div class="form-group row">          
                             <label for="exampleSelect1" class="col-sm-3 col-form-label">Skyrius</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="departamentas" id="departamentas" placeholder="" value="">
-                            </div>                       
+                                <input type="text" class="form-control" name="departamentas" id="departamentas" placeholder="" value="<?php echo escape($data->skyrius); ?>">
+                            </div>
                         </div>
 
-                        <div class="form-group row">          
+                        <div class="form-group row">
                             <label for="exampleSelect1" class="col-sm-3 col-form-label">Pareigybė</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="pareigos" id="post" placeholder="" value="">
-                            </div>                       
+                                <input type="text" class="form-control" name="pareigos" id="post" placeholder="" value="<?php echo escape($data->pareigos); ?>">
+                            </div>
                         </div>
 
-                        <div class="form-group row">          
-                            <label for="exampleSelect1" class="col-sm-3 col-form-label">Darbuotojo rolė</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" name="role" id="user_type" placeholder="" value="">
-                            </div>                            
-                        </div>
-
-                        <div class="form-inline my-2 my-lg-0">
-                            <button type="submit" class="btn btn-primary headButton my-2 my-sm-0" name="register_btn">Atnaujinti</button>             
+                        <div class="form my-2 my-lg-0">
+                            <a href="changepassword.php" class="btn btn-primary headButton my-2 my-sm-0 btnRight">Pakeisti slaptažodį</a>
                         </div>
                     </fieldset>
                 </form>

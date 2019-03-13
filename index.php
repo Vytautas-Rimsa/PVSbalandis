@@ -1,24 +1,34 @@
 <?php
-require_once 'core/init.php';
+    require_once 'core/init.php';
 
-if(Session::exists('home')){
-    echo Session::flash('home');
-}
-
-$user = new User();
-if($user->isLoggedIn()){
+    if(Session::exists('home')){
+        echo Session::flash('home');
+    }
+    $user = new User();
 ?>
-    <p>Sveiki, <a href="profile.php?user=<?php echo escape($user->data()->elpastas); ?>"><?php echo escape($user->data()->elpastas); ?></a></p>
-
-    <ul>
-        <li><a href="logout.php">Log out</a></li>
-        <li><a href="update.php">Update details</a></li>
-        <li><a href="changepassword.php">Update password</a></li>
-    </ul>
-<?php
-    if($user->hasPermission('admin')){
-        echo '<p>Tu esi administratorius</p>';
-    }    
-} else{
-    echo '<p>Tu turi arba <a href="login.php"> PRISIJUNGTI </a> arba <a href="register.php"> PRISIREGISTRUOTI</a></p>';
-}
+<!--<!DOCTYPE html>-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Prisijungimas</title>
+        <link rel="stylesheet" href="css/style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="js/scripts.js"></script>
+    </head>
+    <body class="indeksas">
+        <div class="content">
+            <?php
+                if($user->isLoggedIn() && $user->hasPermission('admin')){
+                    redirect::to('tasks/admin/activeTasks.php');
+                } elseif($user->isLoggedIn() && $user->hasPermission('head')){
+                    redirect::to('tasks/head/activeTasks.php');
+                } elseif($user->isLoggedIn() && $user->hasPermission('employee')){
+                    redirect::to('tasks/user/activeTasks.php');
+                } else{
+                    echo '<a href="login.php"> <img class="displayed" src="images/gear.jpg" alt="clockGear"> </a>';
+                }
+            ?>
+        </div>
+    </body>
+</html>

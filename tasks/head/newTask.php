@@ -1,7 +1,7 @@
 
-
+<!DOCTYPE html>
 <html>
-<head>
+    <head>
 	    <meta charset="utf-8">		
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Sukurti užduotį</title>	
@@ -93,7 +93,7 @@
                     <div class="card mb-3">
                         <div class="card-header headCardHeader">Sukurti naują užduotį</div>
                         <div class="card-body">
-                            <canvas id="myAreaChart" width="100%" height="100%"></canvas>
+                            <canvas id="newTask"></canvas>
                         </div>
                         <div class="card-footer small text-muted">Paskutinis įrašas 11:59 PM</div>
                     </div>                          
@@ -104,7 +104,7 @@
         </div>
         <!-- /#wrapper -->
         <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
+            <i class="fas fa-angle-up upDownButton"></i>
         </a>     
     </body>    
 </html>

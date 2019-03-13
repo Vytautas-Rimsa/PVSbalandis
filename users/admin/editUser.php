@@ -1,5 +1,5 @@
 
-
+<!DOCTYPE html>
 <html>
     <head>
 	    <meta charset="utf-8">		
@@ -50,7 +50,6 @@
             
                 <form method="post" action="editUser.php" class="formaAplication">
                     <fieldset>
-                        <!--<?php echo display_error(); ?>   -->           
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-3 col-form-label">Vardas</label>
                             <div class="col-sm-9">
